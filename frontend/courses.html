@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tất Cả Khóa Học — Mrbo Ads E-Learning</title>
+  <meta name="description" content="Danh sách tất cả khóa học Performance Marketing BĐS. Facebook Ads, Google Ads, TikTok Ads, Landing Page và nhiều hơn nữa.">
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23F97316'/><text x='50%' y='55%' text-anchor='middle' dominant-baseline='middle' font-size='18' font-weight='900' fill='white' font-family='Arial'>M</text></svg>">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <div class="container">
+    <div class="navbar-inner">
+      <a href="/" class="navbar-logo">
+        <div class="logo-icon">M</div>
+        <span class="logo-text">Mrbo<span>Ads</span></span>
+      </a>
+      <ul class="navbar-nav" id="navMenu">
+        <li><a href="/" class="nav-link">Trang chủ</a></li>
+        <li><a href="/courses.html" class="nav-link active">Khóa học</a></li>
+        <li><a href="/#instructor" class="nav-link">Giảng viên</a></li>
+        <li><a href="/#testimonials" class="nav-link">Đánh giá</a></li>
+        <li><a href="/#contact" class="nav-link">Liên hệ</a></li>
+      </ul>
+      <div class="navbar-actions">
+        <a href="/login.html" class="btn btn-outline btn-sm" id="btnLogin">Đăng nhập</a>
+        <a href="/register.html" class="btn btn-primary btn-sm" id="btnRegister">Bắt đầu học</a>
+        <div id="userMenu" class="hidden" style="position:relative">
+          <button class="btn btn-ghost btn-sm" id="userMenuBtn" style="gap:8px">
+            <span id="userInitial" style="width:28px;height:28px;background:var(--primary);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.8rem"></span>
+            <span id="userName"></span>
+            <i class="fas fa-chevron-down" style="font-size:0.65rem"></i>
+          </button>
+          <div id="userDropdown" class="hidden" style="position:absolute;top:calc(100% + 8px);right:0;background:var(--dark-700);border:1px solid rgba(255,255,255,0.08);border-radius:var(--radius-md);padding:8px;min-width:180px;z-index:200;box-shadow:var(--shadow-lg)">
+            <a href="/dashboard.html" style="display:flex;align-items:center;gap:8px;padding:9px 12px;border-radius:var(--radius-sm);font-size:0.85rem;color:var(--text-secondary)" onmouseover="this.style.background='rgba(255,255,255,0.06)';this.style.color='var(--text-primary)'" onmouseout="this.style.background='';this.style.color='var(--text-secondary)'"><i class="fas fa-tachometer-alt" style="width:14px"></i> Dashboard</a>
+            <button id="btnLogout" style="width:100%;display:flex;align-items:center;gap:8px;padding:9px 12px;border-radius:var(--radius-sm);font-size:0.85rem;color:#F87171;background:none;border:none;cursor:pointer" onmouseover="this.style.background='rgba(239,68,68,0.08)'" onmouseout="this.style.background=''"><i class="fas fa-sign-out-alt" style="width:14px"></i> Đăng xuất</button>
+          </div>
+        </div>
+        <button class="mobile-menu-btn" id="mobileMenuBtn"><i class="fas fa-bars"></i></button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- PAGE HEADER -->
+<div style="padding: 96px 0 40px; background: linear-gradient(180deg, var(--dark-800), var(--dark-900)); border-bottom: 1px solid rgba(255,255,255,0.06)">
+  <div class="container">
+    <div class="section-tag" style="margin-bottom:12px"><i class="fas fa-book-open"></i> Thư Viện</div>
+    <h1 style="font-size:2.2rem;font-weight:900;margin-bottom:10px">Tất Cả Khóa Học</h1>
+    <p style="color:var(--text-secondary);font-size:0.95rem">Khám phá <span id="totalCoursesCount" style="color:var(--primary);font-weight:700">20+</span> khóa học Performance Marketing chuyên sâu cho ngành BĐS</p>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div style="padding: 40px 0 80px; min-height: 60vh">
+  <div class="container">
+    <!-- Filter Bar -->
+    <div class="filter-bar">
+      <div class="search-input-wrapper">
+        <i class="fas fa-search search-icon"></i>
+        <input type="text" class="search-input" id="searchInput" placeholder="Tìm kiếm khóa học..." />
+      </div>
+
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="filter-btn active" data-filter="all" onclick="setFilter('all', this)">Tất cả</button>
+        <button class="filter-btn" data-filter="facebook-ads" onclick="setFilter('facebook-ads', this)"><i class="fab fa-facebook"></i> Facebook</button>
+        <button class="filter-btn" data-filter="google-ads" onclick="setFilter('google-ads', this)"><i class="fab fa-google"></i> Google</button>
+        <button class="filter-btn" data-filter="tiktok-ads" onclick="setFilter('tiktok-ads', this)"><i class="fab fa-tiktok"></i> TikTok</button>
+        <button class="filter-btn" data-filter="zalo-ads" onclick="setFilter('zalo-ads', this)">Zalo</button>
+        <button class="filter-btn" data-filter="landing-page" onclick="setFilter('landing-page', this)">Landing Page</button>
+      </div>
+
+      <select id="levelFilter" onchange="applyFilters()" style="padding:8px 14px;background:var(--dark-700);border:1.5px solid rgba(255,255,255,0.1);border-radius:100px;color:var(--text-secondary);font-size:0.82rem;cursor:pointer;outline:none">
+        <option value="">Mọi cấp độ</option>
+        <option value="beginner">Cơ bản</option>
+        <option value="intermediate">Trung cấp</option>
+        <option value="advanced">Nâng cao</option>
+      </select>
+
+      <select id="sortFilter" onchange="applyFilters()" style="padding:8px 14px;background:var(--dark-700);border:1.5px solid rgba(255,255,255,0.1);border-radius:100px;color:var(--text-secondary);font-size:0.82rem;cursor:pointer;outline:none">
+        <option value="popular">Phổ biến nhất</option>
+        <option value="newest">Mới nhất</option>
+        <option value="price_asc">Giá tăng dần</option>
+        <option value="price_desc">Giá giảm dần</option>
+        <option value="rating">Đánh giá cao</option>
+      </select>
+    </div>
+
+    <!-- Results Info -->
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px">
+      <p style="font-size:0.85rem;color:var(--text-muted)">Hiển thị <span id="showingCount" style="color:var(--text-primary);font-weight:600">0</span> kết quả</p>
+    </div>
+
+    <!-- Courses Grid -->
+    <div class="courses-grid" id="coursesGrid">
+      <div style="display:flex;align-items:center;justify-content:center;padding:80px;grid-column:1/-1;color:var(--text-muted)">
+        <div class="loader" style="margin-right:12px"></div> Đang tải khóa học...
+      </div>
+    </div>
+
+    <!-- Pagination -->
+    <div id="pagination" style="display:flex;justify-content:center;gap:8px;margin-top:40px"></div>
+  </div>
+</div>
+
+<!-- FOOTER (abbreviated) -->
+<footer>
+  <div class="container">
+    <div style="padding:20px 0;border-top:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:space-between;font-size:0.82rem;color:var(--text-muted)">
+      <span>© 2024 Mrbo Ads. Tất cả quyền được bảo lưu.</span>
+      <a href="/" style="color:var(--primary);font-weight:600">← Về Trang Chủ</a>
+    </div>
+  </div>
+</footer>
+
+<button class="scroll-top" id="scrollTop" aria-label="Scroll to top"><i class="fas fa-chevron-up"></i></button>
+
+<script src="/js/api.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/main.js"></script>
+<script>
+  let currentCategory = '';
+  let currentPage = 1;
+  const LIMIT = 9;
+
+  // Parse URL params on load
+  document.addEventListener('DOMContentLoaded', () => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('category')) {
+      currentCategory = params.get('category');
+      document.querySelectorAll('.filter-btn').forEach(b => {
+        b.classList.toggle('active', b.dataset.filter === currentCategory || (currentCategory && b.dataset.filter === currentCategory));
+        if (b.dataset.filter === 'all') b.classList.remove('active');
+      });
+      const catBtn = document.querySelector(`.filter-btn[data-filter="${currentCategory}"]`);
+      if (catBtn) catBtn.classList.add('active');
+    }
+    loadCourses();
+
+    // Search debounce
+    let searchTimer;
+    document.getElementById('searchInput').addEventListener('input', () => {
+      clearTimeout(searchTimer);
+      searchTimer = setTimeout(() => { currentPage = 1; loadCourses(); }, 400);
+    });
+  });
+
+  function setFilter(category, btn) {
+    currentCategory = category === 'all' ? '' : category;
+    currentPage = 1;
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    loadCourses();
+  }
+
+  function applyFilters() { currentPage = 1; loadCourses(); }
+
+  async function loadCourses() {
+    const grid = document.getElementById('coursesGrid');
+    grid.innerHTML = `<div style="display:flex;align-items:center;justify-content:center;padding:80px;grid-column:1/-1;color:var(--text-muted)"><div class="loader" style="margin-right:12px"></div> Đang tải...</div>`;
+
+    const search = document.getElementById('searchInput').value;
+    const level  = document.getElementById('levelFilter').value;
+
+    const params = new URLSearchParams({ page: currentPage, limit: LIMIT });
+    if (currentCategory) params.set('category', currentCategory);
+    if (search) params.set('search', search);
+    if (level)  params.set('level', level);
+
+    try {
+      const data = await API.get(`/courses?${params}`);
+      if (data.success) {
+        const courses = data.data;
+        document.getElementById('showingCount').textContent = data.pagination.total;
+        document.getElementById('totalCoursesCount').textContent = data.pagination.total + '+';
+
+        if (courses.length === 0) {
+          grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1"><i class="fas fa-search"></i><p>Không tìm thấy khóa học phù hợp.<br><a href="/courses.html" style="color:var(--primary)">Xem tất cả khóa học</a></p></div>`;
+        } else {
+          grid.innerHTML = courses.map(c => renderCourseCard(c)).join('');
+        }
+        renderPagination(data.pagination);
+      }
+    } catch {
+      // Fallback to static courses
+      grid.innerHTML = renderFallbackCourses();
+      document.getElementById('showingCount').textContent = '4';
+    }
+  }
+
+  function renderFallbackCourses() {
+    const courses = [
+      { title: 'Facebook Ads Toàn Diện Cho BĐS 2024', category_name: 'Facebook Ads', level: 'beginner', duration: 1200, rating: 4.8, rating_count: 312, enrolled_count: 1247, price: 2990000, original_price: 4990000, is_featured: true, emoji: '📱', slug: 'facebook-ads-bat-dong-san-2024' },
+      { title: 'Google Ads BĐS: Tìm Kiếm & Display', category_name: 'Google Ads', level: 'intermediate', duration: 960, rating: 4.9, rating_count: 198, enrolled_count: 856, price: 3490000, original_price: 5490000, is_featured: true, emoji: '🔍', slug: 'google-ads-bds-tim-kiem-display' },
+      { title: 'TikTok Ads BĐS: Viral & Chuyển Đổi', category_name: 'TikTok Ads', level: 'beginner', duration: 720, rating: 4.7, rating_count: 445, enrolled_count: 2134, price: 1990000, original_price: 3490000, is_featured: false, emoji: '🎵', slug: 'tiktok-ads-bds-viral-content' },
+      { title: 'Combo 3 Kênh Performance Marketing BĐS', category_name: 'Combo', level: 'advanced', duration: 2400, rating: 5.0, rating_count: 87, enrolled_count: 423, price: 5990000, original_price: 9990000, is_featured: true, emoji: '🚀', slug: 'combo-performance-marketing-bds' },
+      { title: 'Zalo Ads cho Môi Giới BĐS', category_name: 'Zalo Ads', level: 'beginner', duration: 480, rating: 4.6, rating_count: 156, enrolled_count: 678, price: 990000, original_price: 1990000, is_featured: false, emoji: '💬', slug: 'zalo-ads-moi-gioi-bds' },
+      { title: 'Landing Page Chuyển Đổi Cao Cho BĐS', category_name: 'Landing Page', level: 'intermediate', duration: 600, rating: 4.8, rating_count: 203, enrolled_count: 892, price: 1490000, original_price: 2490000, is_featured: false, emoji: '🌐', slug: 'landing-page-chuyen-doi-cao' },
+    ];
+    document.getElementById('showingCount').textContent = courses.length;
+    return courses.map(c => renderCourseCard(c)).join('');
+  }
+
+  function renderPagination(p) {
+    const el = document.getElementById('pagination');
+    if (p.pages <= 1) { el.innerHTML = ''; return; }
+
+    let html = '';
+    for (let i = 1; i <= p.pages; i++) {
+      html += `<button onclick="goToPage(${i})" style="width:36px;height:36px;border-radius:var(--radius-sm);border:1.5px solid ${i === currentPage ? 'var(--primary)' : 'rgba(255,255,255,0.1)'};background:${i === currentPage ? 'var(--primary)' : 'transparent'};color:${i === currentPage ? 'white' : 'var(--text-muted)'};cursor:pointer;font-size:0.85rem;transition:var(--transition)">${i}</button>`;
+    }
+    el.innerHTML = html;
+  }
+
+  function goToPage(p) { currentPage = p; loadCourses(); window.scrollTo({ top: 200, behavior: 'smooth' }); }
+</script>
+</body>
+</html>
