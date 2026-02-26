@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Đăng Nhập — Mrbo Ads E-Learning</title>
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23F97316'/><text x='50%' y='55%' text-anchor='middle' dominant-baseline='middle' font-size='18' font-weight='900' fill='white' font-family='Arial'>M</text></svg>">
+</head>
+<body>
+
+<nav class="navbar" style="position:relative;backdrop-filter:none;background:var(--dark-800)">
+  <div class="container">
+    <div class="navbar-inner">
+      <a href="/" class="navbar-logo">
+        <div class="logo-icon">M</div>
+        <span class="logo-text">Mrbo<span>Ads</span></span>
+      </a>
+      <a href="/register.html" style="font-size:0.85rem;color:var(--text-secondary)">
+        Chưa có tài khoản? <strong style="color:var(--primary)">Đăng ký ngay</strong>
+      </a>
+    </div>
+  </div>
+</nav>
+
+<div class="auth-page">
+  <div class="auth-card">
+    <div class="auth-logo">
+      <div class="logo-icon" style="width:52px;height:52px;font-size:22px;margin:0 auto 12px">M</div>
+      <h1 class="auth-title">Chào mừng trở lại!</h1>
+      <p class="auth-sub">Đăng nhập để tiếp tục học tập cùng Mrbo Ads</p>
+    </div>
+
+    <div class="alert" id="alertMsg"></div>
+
+    <form id="loginForm">
+      <div class="form-group">
+        <label class="form-label" for="email">Email</label>
+        <div class="input-group">
+          <i class="fas fa-envelope input-icon"></i>
+          <input type="email" class="form-input" id="email" name="email" placeholder="email@example.com" required autocomplete="email" />
+        </div>
+        <div class="form-error" id="emailError"></div>
+      </div>
+
+      <div class="form-group">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:7px">
+          <label class="form-label" for="password" style="margin:0">Mật khẩu</label>
+          <a href="#" style="font-size:0.78rem;color:var(--primary)">Quên mật khẩu?</a>
+        </div>
+        <div class="input-group" style="position:relative">
+          <i class="fas fa-lock input-icon"></i>
+          <input type="password" class="form-input" id="password" name="password" placeholder="Nhập mật khẩu" required autocomplete="current-password" style="padding-right:42px" />
+          <button type="button" id="togglePassword" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--text-muted);cursor:pointer;font-size:0.85rem">
+            <i class="fas fa-eye" id="eyeIcon"></i>
+          </button>
+        </div>
+        <div class="form-error" id="passwordError"></div>
+      </div>
+
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:20px">
+        <input type="checkbox" id="remember" style="accent-color:var(--primary);cursor:pointer">
+        <label for="remember" style="font-size:0.83rem;color:var(--text-secondary);cursor:pointer">Ghi nhớ đăng nhập</label>
+      </div>
+
+      <button type="submit" class="btn btn-primary w-100" id="submitBtn" style="padding:13px">
+        <i class="fas fa-sign-in-alt"></i>
+        Đăng Nhập
+      </button>
+    </form>
+
+    <div class="form-divider">hoặc</div>
+
+    <div style="display:flex;gap:10px">
+      <button class="btn btn-ghost w-100" style="flex:1" onclick="socialLogin('facebook')">
+        <i class="fab fa-facebook" style="color:#1877F2"></i> Facebook
+      </button>
+      <button class="btn btn-ghost w-100" style="flex:1" onclick="socialLogin('google')">
+        <i class="fab fa-google" style="color:#4285F4"></i> Google
+      </button>
+    </div>
+
+    <p style="text-align:center;margin-top:24px;font-size:0.85rem;color:var(--text-muted)">
+      Chưa có tài khoản?
+      <a href="/register.html" style="color:var(--primary);font-weight:600">Đăng ký miễn phí</a>
+    </p>
+
+    <div style="margin-top:20px;padding:14px;background:var(--dark-600);border-radius:var(--radius-md);font-size:0.78rem;color:var(--text-muted)">
+      <strong style="color:var(--text-secondary)">Demo accounts:</strong><br>
+      Admin: admin@mrboads.com / Admin@123<br>
+      Giảng viên: mrbo@mrboads.com / Mrbo@123
+    </div>
+  </div>
+</div>
+
+<script src="/js/api.js"></script>
+<script src="/js/auth.js"></script>
+<script>
+  // Redirect if already logged in
+  if (Auth.isLoggedIn()) window.location.href = '/dashboard.html';
+
+  // Toggle password visibility
+  document.getElementById('togglePassword').addEventListener('click', () => {
+    const input = document.getElementById('password');
+    const icon = document.getElementById('eyeIcon');
+    if (input.type === 'password') {
+      input.type = 'text';
+      icon.className = 'fas fa-eye-slash';
+    } else {
+      input.type = 'password';
+      icon.className = 'fas fa-eye';
+    }
+  });
+
+  // Form submit
+  document.getElementById('loginForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = document.getElementById('submitBtn');
+    const alert = document.getElementById('alertMsg');
+
+    // Clear errors
+    document.getElementById('emailError').classList.remove('show');
+    document.getElementById('passwordError').classList.remove('show');
+    alert.className = 'alert';
+
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value;
+
+    // Validate
+    let valid = true;
+    if (!email || !/\S+@\S+\.\S+/.test(email)) {
+      document.getElementById('emailError').textContent = 'Vui lòng nhập email hợp lệ.';
+      document.getElementById('emailError').classList.add('show');
+      valid = false;
+    }
+    if (!password) {
+      document.getElementById('passwordError').textContent = 'Vui lòng nhập mật khẩu.';
+      document.getElementById('passwordError').classList.add('show');
+      valid = false;
+    }
+    if (!valid) return;
+
+    btn.disabled = true;
+    btn.innerHTML = '<div class="loader"></div> Đang đăng nhập...';
+
+    try {
+      const data = await API.post('/auth/login', { email, password });
+      if (data.success) {
+        Auth.setToken(data.token, data.user);
+        alert.className = 'alert alert-success show';
+        alert.innerHTML = '<i class="fas fa-check-circle"></i> Đăng nhập thành công! Đang chuyển trang...';
+        setTimeout(() => {
+          const redirect = new URLSearchParams(window.location.search).get('redirect') || '/dashboard.html';
+          window.location.href = redirect;
+        }, 1000);
+      } else {
+        alert.className = 'alert alert-error show';
+        alert.innerHTML = `<i class="fas fa-exclamation-circle"></i> ${data.message}`;
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Đăng Nhập';
+      }
+    } catch (err) {
+      alert.className = 'alert alert-error show';
+      alert.innerHTML = '<i class="fas fa-exclamation-circle"></i> Lỗi kết nối. Vui lòng thử lại.';
+      btn.disabled = false;
+      btn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Đăng Nhập';
+    }
+  });
+
+  function socialLogin(provider) {
+    const alert = document.getElementById('alertMsg');
+    alert.className = 'alert alert-info show';
+    alert.innerHTML = `<i class="fas fa-info-circle"></i> Đăng nhập bằng ${provider === 'facebook' ? 'Facebook' : 'Google'} sẽ sớm được hỗ trợ.`;
+  }
+</script>
+</body>
+</html>

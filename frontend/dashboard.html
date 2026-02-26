@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard — Mrbo Ads E-Learning</title>
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23F97316'/><text x='50%' y='55%' text-anchor='middle' dominant-baseline='middle' font-size='18' font-weight='900' fill='white' font-family='Arial'>M</text></svg>">
+</head>
+<body>
+
+<nav class="navbar" id="navbar">
+  <div class="container">
+    <div class="navbar-inner">
+      <a href="/" class="navbar-logo">
+        <div class="logo-icon">M</div>
+        <span class="logo-text">Mrbo<span>Ads</span></span>
+      </a>
+      <ul class="navbar-nav" id="navMenu">
+        <li><a href="/" class="nav-link">Trang chủ</a></li>
+        <li><a href="/courses.html" class="nav-link">Khóa học</a></li>
+        <li><a href="/dashboard.html" class="nav-link active">Dashboard</a></li>
+      </ul>
+      <div class="navbar-actions">
+        <div id="userMenu" style="position:relative">
+          <button class="btn btn-ghost btn-sm" id="userMenuBtn" style="gap:8px">
+            <span id="userInitial" style="width:28px;height:28px;background:var(--primary);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.8rem"></span>
+            <span id="userName"></span>
+            <i class="fas fa-chevron-down" style="font-size:0.65rem"></i>
+          </button>
+          <div id="userDropdown" class="hidden" style="position:absolute;top:calc(100% + 8px);right:0;background:var(--dark-700);border:1px solid rgba(255,255,255,0.08);border-radius:var(--radius-md);padding:8px;min-width:180px;z-index:200;box-shadow:var(--shadow-lg)">
+            <button id="btnLogout" style="width:100%;display:flex;align-items:center;gap:8px;padding:9px 12px;border-radius:var(--radius-sm);font-size:0.85rem;color:#F87171;background:none;border:none;cursor:pointer" onmouseover="this.style.background='rgba(239,68,68,0.08)'" onmouseout="this.style.background=''"><i class="fas fa-sign-out-alt" style="width:14px"></i> Đăng xuất</button>
+          </div>
+        </div>
+        <button class="mobile-menu-btn" id="mobileMenuBtn"><i class="fas fa-bars"></i></button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="dashboard-page">
+  <!-- Dashboard Header -->
+  <div class="dashboard-header">
+    <div class="container">
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px">
+        <div>
+          <h1 class="dashboard-title">Xin chào, <span id="greetName" style="color:var(--primary)">Học viên</span>! 👋</h1>
+          <p class="dashboard-sub">Tiếp tục hành trình học tập của bạn</p>
+        </div>
+        <a href="/courses.html" class="btn btn-primary">
+          <i class="fas fa-plus"></i> Thêm Khóa Học
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- Stats Cards -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon orange"><i class="fas fa-book-open"></i></div>
+        <div class="stat-info">
+          <div class="stat-info-value" id="statEnrolled">0</div>
+          <div class="stat-info-label">Khóa học đã đăng ký</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon green"><i class="fas fa-check-circle"></i></div>
+        <div class="stat-info">
+          <div class="stat-info-value" id="statCompleted">0</div>
+          <div class="stat-info-label">Khóa học hoàn thành</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon blue"><i class="fas fa-clock"></i></div>
+        <div class="stat-info">
+          <div class="stat-info-value" id="statHours">0h</div>
+          <div class="stat-info-label">Giờ học tích lũy</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon purple"><i class="fas fa-certificate"></i></div>
+        <div class="stat-info">
+          <div class="stat-info-value" id="statCerts">0</div>
+          <div class="stat-info-label">Chứng chỉ nhận được</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tabs -->
+    <div style="display:flex;gap:4px;margin-bottom:28px;border-bottom:1px solid rgba(255,255,255,0.06);padding-bottom:0">
+      <button class="tab-btn active" id="tab-my-courses" onclick="switchTab('my-courses')" style="padding:10px 20px;background:none;border:none;color:var(--text-primary);font-size:0.9rem;font-weight:600;cursor:pointer;border-bottom:2px solid var(--primary);margin-bottom:-1px">
+        <i class="fas fa-book"></i> Khóa Học Của Tôi
+      </button>
+      <button class="tab-btn" id="tab-in-progress" onclick="switchTab('in-progress')" style="padding:10px 20px;background:none;border:none;color:var(--text-muted);font-size:0.9rem;font-weight:500;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:var(--transition)">
+        <i class="fas fa-spinner"></i> Đang Học
+      </button>
+      <button class="tab-btn" id="tab-completed" onclick="switchTab('completed')" style="padding:10px 20px;background:none;border:none;color:var(--text-muted);font-size:0.9rem;font-weight:500;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:var(--transition)">
+        <i class="fas fa-trophy"></i> Đã Hoàn Thành
+      </button>
+      <button class="tab-btn" id="tab-profile" onclick="switchTab('profile')" style="padding:10px 20px;background:none;border:none;color:var(--text-muted);font-size:0.9rem;font-weight:500;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:var(--transition)">
+        <i class="fas fa-user"></i> Hồ Sơ
+      </button>
+    </div>
+
+    <!-- My Courses Tab -->
+    <div id="panelMyCourses" style="margin-bottom:60px">
+      <div id="myCoursesGrid" class="courses-grid">
+        <div style="display:flex;align-items:center;justify-content:center;padding:60px;grid-column:1/-1;color:var(--text-muted)">
+          <div class="loader" style="margin-right:12px"></div> Đang tải khóa học...
+        </div>
+      </div>
+      <div id="noCoursesMsg" class="hidden">
+        <div class="empty-state">
+          <i class="fas fa-book-open"></i>
+          <p>Bạn chưa đăng ký khóa học nào.<br>
+            <a href="/courses.html" style="color:var(--primary);font-weight:600">Khám phá khóa học ngay →</a>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- In Progress Tab -->
+    <div id="panelInProgress" class="hidden" style="margin-bottom:60px">
+      <div id="inProgressGrid" class="courses-grid"></div>
+    </div>
+
+    <!-- Completed Tab -->
+    <div id="panelCompleted" class="hidden" style="margin-bottom:60px">
+      <div id="completedGrid" class="courses-grid"></div>
+    </div>
+
+    <!-- Profile Tab -->
+    <div id="panelProfile" class="hidden" style="max-width:520px;margin-bottom:60px">
+      <div style="background:var(--dark-700);border:1px solid rgba(255,255,255,0.06);border-radius:var(--radius-xl);padding:32px">
+        <h3 style="font-size:1.1rem;font-weight:700;margin-bottom:24px">Thông Tin Cá Nhân</h3>
+
+        <div class="alert" id="profileAlert"></div>
+
+        <form id="profileForm">
+          <div class="form-group">
+            <label class="form-label">Họ và tên</label>
+            <div class="input-group">
+              <i class="fas fa-user input-icon"></i>
+              <input type="text" class="form-input" id="profileName" placeholder="Họ và tên" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email</label>
+            <div class="input-group">
+              <i class="fas fa-envelope input-icon"></i>
+              <input type="email" class="form-input" id="profileEmail" placeholder="Email" disabled style="opacity:0.6" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Số điện thoại</label>
+            <div class="input-group">
+              <i class="fas fa-phone input-icon"></i>
+              <input type="tel" class="form-input" id="profilePhone" placeholder="Số điện thoại" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Ngày tham gia</label>
+            <div class="input-group">
+              <i class="fas fa-calendar input-icon"></i>
+              <input type="text" class="form-input" id="profileJoined" disabled style="opacity:0.6" />
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary" id="profileSaveBtn">
+            <i class="fas fa-save"></i> Lưu Thay Đổi
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<button class="scroll-top" id="scrollTop" aria-label="Scroll to top"><i class="fas fa-chevron-up"></i></button>
+
+<script src="/js/api.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/main.js"></script>
+<script>
+  // Redirect if not logged in
+  if (!Auth.isLoggedIn()) window.location.href = '/login.html?redirect=/dashboard.html';
+
+  let allEnrollments = [];
+
+  document.addEventListener('DOMContentLoaded', async () => {
+    const user = Auth.getUser();
+    if (user) {
+      document.getElementById('greetName').textContent = user.name.split(' ').pop();
+      document.getElementById('profileName').value = user.name;
+      document.getElementById('profileEmail').value = user.email;
+      document.getElementById('profilePhone').value = user.phone || '';
+      document.getElementById('profileJoined').value = user.created_at ? new Date(user.created_at).toLocaleDateString('vi-VN') : '';
+    }
+
+    await loadMyEnrollments();
+
+    // Handle hash tab
+    const hash = window.location.hash.replace('#', '');
+    if (['my-courses','in-progress','completed','profile'].includes(hash)) switchTab(hash);
+  });
+
+  async function loadMyEnrollments() {
+    try {
+      const data = await API.authGet('/users/me/enrollments');
+      if (data.success) {
+        allEnrollments = data.data;
+        renderDashboard(allEnrollments);
+      }
+    } catch {
+      // Demo fallback
+      allEnrollments = getDemoEnrollments();
+      renderDashboard(allEnrollments);
+    }
+  }
+
+  function getDemoEnrollments() {
+    return [
+      { course_id: 1, title: 'Facebook Ads Toàn Diện Cho BĐS 2024', category_name: 'Facebook Ads', level: 'beginner', duration: 1200, rating: 4.8, progress: 45, slug: 'facebook-ads-bat-dong-san-2024', instructor_name: 'Mrbo Ads', enrolled_at: '2024-01-15' },
+      { course_id: 2, title: 'Google Ads BĐS: Tìm Kiếm & Display', category_name: 'Google Ads', level: 'intermediate', duration: 960, rating: 4.9, progress: 100, slug: 'google-ads-bds-tim-kiem-display', instructor_name: 'Mrbo Ads', enrolled_at: '2024-01-10' },
+      { course_id: 3, title: 'TikTok Ads BĐS: Viral & Chuyển Đổi', category_name: 'TikTok Ads', level: 'beginner', duration: 720, rating: 4.7, progress: 0, slug: 'tiktok-ads-bds-viral-content', instructor_name: 'Mrbo Ads', enrolled_at: '2024-02-01' },
+    ];
+  }
+
+  function renderDashboard(enrollments) {
+    const completed = enrollments.filter(e => e.progress === 100);
+    const inProgress = enrollments.filter(e => e.progress > 0 && e.progress < 100);
+    const totalHours = Math.round(enrollments.reduce((s, e) => s + (e.duration || 0), 0) / 60);
+
+    document.getElementById('statEnrolled').textContent = enrollments.length;
+    document.getElementById('statCompleted').textContent = completed.length;
+    document.getElementById('statHours').textContent = totalHours + 'h';
+    document.getElementById('statCerts').textContent = completed.length;
+
+    const grid = document.getElementById('myCoursesGrid');
+    if (enrollments.length === 0) {
+      grid.innerHTML = '';
+      document.getElementById('noCoursesMsg').classList.remove('hidden');
+    } else {
+      document.getElementById('noCoursesMsg').classList.add('hidden');
+      grid.innerHTML = enrollments.map(e => renderEnrollmentCard(e)).join('');
+    }
+
+    document.getElementById('inProgressGrid').innerHTML = inProgress.length > 0
+      ? inProgress.map(e => renderEnrollmentCard(e)).join('')
+      : `<div class="empty-state" style="grid-column:1/-1"><i class="fas fa-spinner"></i><p>Không có khóa học đang học.</p></div>`;
+
+    document.getElementById('completedGrid').innerHTML = completed.length > 0
+      ? completed.map(e => renderEnrollmentCard(e)).join('')
+      : `<div class="empty-state" style="grid-column:1/-1"><i class="fas fa-trophy"></i><p>Bạn chưa hoàn thành khóa học nào.</p></div>`;
+  }
+
+  function renderEnrollmentCard(e) {
+    const levelLabels = { beginner: 'Cơ bản', intermediate: 'Trung cấp', advanced: 'Nâng cao' };
+    const progressColor = e.progress === 100 ? 'var(--accent-green)' : 'var(--primary)';
+    const emoji = { 'Facebook Ads': '📱', 'Google Ads': '🔍', 'TikTok Ads': '🎵', 'Zalo Ads': '💬', 'Landing Page': '🌐' }[e.category_name] || '📚';
+
+    return `
+      <div class="course-card" onclick="window.location.href='/course.html?slug=${e.slug}'">
+        <div class="course-thumbnail">
+          <div class="course-thumbnail-placeholder">${emoji}</div>
+          ${e.progress === 100 ? '<div class="course-badge badge-featured" style="background:var(--accent-green)"><i class="fas fa-check"></i> Hoàn thành</div>' : ''}
+          <div class="course-level">${levelLabels[e.level] || e.level}</div>
+        </div>
+        <div class="course-body">
+          <div class="course-category">${e.category_name || ''}</div>
+          <h3 class="course-title">${e.title}</h3>
+          <div class="course-instructor"><i class="fas fa-user" style="font-size:0.7rem;margin-right:4px"></i> ${e.instructor_name || 'Mrbo Ads'}</div>
+          <div style="margin-bottom:10px">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+              <span style="font-size:0.78rem;color:var(--text-muted)">Tiến độ</span>
+              <span style="font-size:0.82rem;font-weight:700;color:${progressColor}">${e.progress || 0}%</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width:${e.progress || 0}%;background:${e.progress === 100 ? 'linear-gradient(90deg,var(--accent-green),#34D399)' : 'linear-gradient(90deg,var(--primary),var(--accent-gold))'}"></div>
+            </div>
+          </div>
+          <div class="course-meta">
+            <span><i class="fas fa-clock"></i> ${Math.round((e.duration || 0) / 60)}h ${(e.duration || 0) % 60}m</span>
+            <span><i class="fas fa-star" style="color:var(--accent-gold)"></i> ${e.rating || 0}</span>
+          </div>
+          <a href="/course.html?slug=${e.slug}" class="btn btn-primary w-100 btn-sm" style="margin-top:4px">
+            ${e.progress === 0 ? '<i class="fas fa-play"></i> Bắt đầu học' : e.progress === 100 ? '<i class="fas fa-redo"></i> Xem lại' : '<i class="fas fa-play"></i> Tiếp tục học'}
+          </a>
+        </div>
+      </div>
+    `;
+  }
+
+  function switchTab(tab) {
+    const panels = { 'my-courses': 'panelMyCourses', 'in-progress': 'panelInProgress', 'completed': 'panelCompleted', 'profile': 'panelProfile' };
+    Object.entries(panels).forEach(([key, panelId]) => {
+      const panel = document.getElementById(panelId);
+      if (panel) panel.classList.toggle('hidden', key !== tab);
+    });
+
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      const isActive = btn.id === `tab-${tab}`;
+      btn.style.color = isActive ? 'var(--text-primary)' : 'var(--text-muted)';
+      btn.style.borderBottom = isActive ? '2px solid var(--primary)' : '2px solid transparent';
+      btn.style.fontWeight = isActive ? '600' : '500';
+    });
+    window.location.hash = tab;
+  }
+
+  // Profile form
+  document.getElementById('profileForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = document.getElementById('profileSaveBtn');
+    const alertEl = document.getElementById('profileAlert');
+    btn.disabled = true;
+    btn.innerHTML = '<div class="loader"></div> Đang lưu...';
+
+    try {
+      const data = await API.authPut('/auth/profile', {
+        name: document.getElementById('profileName').value,
+        phone: document.getElementById('profilePhone').value,
+      });
+      if (data.success) {
+        Auth.updateUser(data.user);
+        alertEl.className = 'alert alert-success show';
+        alertEl.innerHTML = '<i class="fas fa-check-circle"></i> Cập nhật thành công!';
+        document.getElementById('greetName').textContent = data.user.name.split(' ').pop();
+        document.getElementById('userName').textContent = data.user.name;
+      } else {
+        alertEl.className = 'alert alert-error show';
+        alertEl.innerHTML = `<i class="fas fa-exclamation-circle"></i> ${data.message}`;
+      }
+    } catch {
+      alertEl.className = 'alert alert-info show';
+      alertEl.innerHTML = '<i class="fas fa-check-circle"></i> Hồ sơ đã được cập nhật (demo)!';
+    }
+    btn.disabled = false;
+    btn.innerHTML = '<i class="fas fa-save"></i> Lưu Thay Đổi';
+  });
+</script>
+</body>
+</html>

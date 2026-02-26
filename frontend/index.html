@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mrbo Ads — Performance Marketing BĐS | E-Learning</title>
+  <meta name="description" content="Học Performance Marketing cho Bất Động Sản với Mrbo Ads. Facebook Ads, Google Ads, TikTok Ads chuyên sâu — từ cơ bản đến nâng cao.">
+  <meta property="og:title" content="Mrbo Ads E-Learning — Performance Marketing BĐS">
+  <meta property="og:description" content="Nền tảng học quảng cáo số hàng đầu dành riêng cho môi giới và chủ đầu tư bất động sản.">
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23F97316'/><text x='50%' y='55%' text-anchor='middle' dominant-baseline='middle' font-size='18' font-weight='900' fill='white' font-family='Arial'>M</text></svg>">
+</head>
+<body>
+
+<!-- ═══════════════════════════════ NAVBAR ═══════════════════════════════════ -->
+<nav class="navbar" id="navbar">
+  <div class="container">
+    <div class="navbar-inner">
+      <a href="/" class="navbar-logo">
+        <div class="logo-icon">M</div>
+        <span class="logo-text">Mrbo<span>Ads</span></span>
+      </a>
+
+      <ul class="navbar-nav" id="navMenu">
+        <li><a href="/" class="nav-link active">Trang chủ</a></li>
+        <li><a href="/courses.html" class="nav-link">Khóa học</a></li>
+        <li><a href="#instructor" class="nav-link">Giảng viên</a></li>
+        <li><a href="#testimonials" class="nav-link">Đánh giá</a></li>
+        <li><a href="#contact" class="nav-link">Liên hệ</a></li>
+      </ul>
+
+      <div class="navbar-actions">
+        <a href="/login.html" class="btn btn-outline btn-sm" id="btnLogin">Đăng nhập</a>
+        <a href="/register.html" class="btn btn-primary btn-sm" id="btnRegister">Bắt đầu học</a>
+        <!-- User menu (hidden by default) -->
+        <div id="userMenu" class="hidden" style="position:relative">
+          <button class="btn btn-ghost btn-sm" id="userMenuBtn" style="gap:8px">
+            <span id="userInitial" style="width:28px;height:28px;background:var(--primary);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.8rem"></span>
+            <span id="userName"></span>
+            <i class="fas fa-chevron-down" style="font-size:0.65rem"></i>
+          </button>
+          <div id="userDropdown" class="hidden" style="position:absolute;top:calc(100% + 8px);right:0;background:var(--dark-700);border:1px solid rgba(255,255,255,0.08);border-radius:var(--radius-md);padding:8px;min-width:180px;z-index:200;box-shadow:var(--shadow-lg)">
+            <a href="/dashboard.html" style="display:flex;align-items:center;gap:8px;padding:9px 12px;border-radius:var(--radius-sm);font-size:0.85rem;color:var(--text-secondary);transition:var(--transition)" onmouseover="this.style.background='rgba(255,255,255,0.06)';this.style.color='var(--text-primary)'" onmouseout="this.style.background='';this.style.color='var(--text-secondary)'"><i class="fas fa-tachometer-alt" style="width:14px"></i> Dashboard</a>
+            <a href="/dashboard.html#my-courses" style="display:flex;align-items:center;gap:8px;padding:9px 12px;border-radius:var(--radius-sm);font-size:0.85rem;color:var(--text-secondary);transition:var(--transition)" onmouseover="this.style.background='rgba(255,255,255,0.06)';this.style.color='var(--text-primary)'" onmouseout="this.style.background='';this.style.color='var(--text-secondary)'"><i class="fas fa-book" style="width:14px"></i> Khóa học của tôi</a>
+            <hr style="border-color:rgba(255,255,255,0.06);margin:6px 0">
+            <button id="btnLogout" style="width:100%;display:flex;align-items:center;gap:8px;padding:9px 12px;border-radius:var(--radius-sm);font-size:0.85rem;color:#F87171;background:none;border:none;cursor:pointer;transition:var(--transition)" onmouseover="this.style.background='rgba(239,68,68,0.08)'" onmouseout="this.style.background=''"><i class="fas fa-sign-out-alt" style="width:14px"></i> Đăng xuất</button>
+          </div>
+        </div>
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════ HERO ═════════════════════════════════════ -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-text">
+        <div class="hero-badge">
+          <i class="fas fa-bolt"></i>
+          #1 Nền Tảng Performance Marketing BĐS
+        </div>
+        <h1 class="hero-title">
+          Làm Chủ<br>
+          <span class="gradient-text">Quảng Cáo Số</span><br>
+          Trong BĐS
+        </h1>
+        <p class="hero-desc">
+          Học Facebook Ads, Google Ads, TikTok Ads chuyên sâu từ chuyên gia <strong>Mrbo Ads</strong>.
+          Tạo leads chất lượng, tiết kiệm ngân sách, tăng tỷ lệ chuyển đổi cho mọi dự án bất động sản.
+        </p>
+        <div class="hero-stats">
+          <div class="stat-item">
+            <div class="stat-number" data-count="4700">4,700+</div>
+            <div class="stat-label">Học viên</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number" data-count="20">20+</div>
+            <div class="stat-label">Khóa học</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">4.9★</div>
+            <div class="stat-label">Đánh giá</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">98%</div>
+            <div class="stat-label">Hài lòng</div>
+          </div>
+        </div>
+        <div class="hero-actions">
+          <a href="/courses.html" class="btn btn-primary btn-xl">
+            <i class="fas fa-play-circle"></i>
+            Xem Khóa Học
+          </a>
+          <a href="/register.html" class="btn btn-outline btn-xl">
+            Đăng Ký Miễn Phí
+            <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="floating-badge top-right">
+          <i class="fas fa-chart-line"></i>
+          <span>ROAS <strong style="color:var(--accent-green)">8.4x</strong></span>
+        </div>
+        <div class="hero-card">
+          <div class="card-header-badge">
+            <div class="badge-dot red"></div>
+            <div class="badge-dot orange"></div>
+            <div class="badge-dot green"></div>
+            <span style="font-size:0.78rem;color:var(--text-muted);margin-left:8px">Campaign Dashboard</span>
+          </div>
+
+          <div class="card-metric">
+            <div class="metric-label">Tỷ lệ chuyển đổi</div>
+            <div class="metric-value">+324%</div>
+            <div class="metric-bar">
+              <div class="metric-bar-fill" style="width:78%"></div>
+            </div>
+          </div>
+
+          <div class="mini-stats">
+            <div class="mini-stat">
+              <div class="mini-stat-label">Leads/ngày</div>
+              <div class="mini-stat-value orange">142</div>
+            </div>
+            <div class="mini-stat">
+              <div class="mini-stat-label">CPL</div>
+              <div class="mini-stat-value blue">28k</div>
+            </div>
+            <div class="mini-stat">
+              <div class="mini-stat-label">Impressions</div>
+              <div class="mini-stat-value purple">2.4M</div>
+            </div>
+            <div class="mini-stat">
+              <div class="mini-stat-label">CTR</div>
+              <div class="mini-stat-value green">4.8%</div>
+            </div>
+          </div>
+        </div>
+        <div class="floating-badge bottom-left">
+          <i class="fas fa-graduation-cap"></i>
+          <span><strong>142</strong> học viên mới hôm nay</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ CATEGORIES ═══════════════════════════════ -->
+<section class="categories-section">
+  <div class="container">
+    <div class="section-header fade-in">
+      <div class="section-tag"><i class="fas fa-th-large"></i> Danh Mục</div>
+      <h2 class="section-title">Học Theo Chủ Đề</h2>
+      <p class="section-desc">Chuyên sâu từng kênh quảng cáo, từng nghiệp vụ trong Performance Marketing BĐS</p>
+    </div>
+    <div class="categories-grid" id="categoriesGrid">
+      <!-- Loaded by JS -->
+      <div class="category-card fade-in" onclick="filterByCategory('facebook-ads')">
+        <div class="category-icon" style="background:rgba(24,119,242,0.12);color:#1877F2"><i class="fab fa-facebook"></i></div>
+        <div class="category-name">Facebook Ads</div>
+        <div class="category-count">5 khóa học</div>
+      </div>
+      <div class="category-card fade-in" onclick="filterByCategory('google-ads')">
+        <div class="category-icon" style="background:rgba(66,133,244,0.12);color:#4285F4"><i class="fab fa-google"></i></div>
+        <div class="category-name">Google Ads</div>
+        <div class="category-count">4 khóa học</div>
+      </div>
+      <div class="category-card fade-in" onclick="filterByCategory('tiktok-ads')">
+        <div class="category-icon" style="background:rgba(0,0,0,0.3);color:#fff"><i class="fab fa-tiktok"></i></div>
+        <div class="category-name">TikTok Ads</div>
+        <div class="category-count">3 khóa học</div>
+      </div>
+      <div class="category-card fade-in" onclick="filterByCategory('zalo-ads')">
+        <div class="category-icon" style="background:rgba(0,104,255,0.12);color:#0068FF"><i class="fas fa-comment"></i></div>
+        <div class="category-name">Zalo Ads</div>
+        <div class="category-count">2 khóa học</div>
+      </div>
+      <div class="category-card fade-in" onclick="filterByCategory('landing-page')">
+        <div class="category-icon" style="background:rgba(16,185,129,0.12);color:#10B981"><i class="fas fa-file-code"></i></div>
+        <div class="category-name">Landing Page</div>
+        <div class="category-count">3 khóa học</div>
+      </div>
+      <div class="category-card fade-in" onclick="filterByCategory('data-analytics')">
+        <div class="category-icon" style="background:rgba(139,92,246,0.12);color:#8B5CF6"><i class="fas fa-chart-bar"></i></div>
+        <div class="category-name">Data & Analytics</div>
+        <div class="category-count">2 khóa học</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════════════════════ FEATURED COURSES ═══════════════════════════════ -->
+<section id="courses">
+  <div class="container">
+    <div class="section-header fade-in">
+      <div class="section-tag"><i class="fas fa-fire"></i> Nổi Bật</div>
+      <h2 class="section-title">Khóa Học Được Yêu Thích</h2>
+      <p class="section-desc">Những khóa học được đánh giá cao nhất, được thiết kế thực chiến cho ngành BĐS</p>
+    </div>
+    <div class="courses-grid" id="featuredCoursesGrid">
+      <!-- Loading placeholder -->
+      <div style="display:flex;align-items:center;justify-content:center;padding:60px;grid-column:1/-1;color:var(--text-muted)">
+        <div class="loader" style="margin-right:12px"></div> Đang tải khóa học...
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:36px">
+      <a href="/courses.html" class="btn btn-outline btn-lg">
+        Xem Tất Cả Khóa Học
+        <i class="fas fa-arrow-right"></i>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════ WHY CHOOSE US ═════════════════════════════════ -->
+<section style="background:var(--dark-800)">
+  <div class="container">
+    <div class="section-header fade-in">
+      <div class="section-tag"><i class="fas fa-star"></i> Tại Sao Chọn</div>
+      <h2 class="section-title">Học Cùng Mrbo Ads</h2>
+      <p class="section-desc">Phương pháp học thực chiến, được đúc kết từ hàng nghìn chiến dịch quảng cáo BĐS thực tế</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card fade-in">
+        <div class="feature-icon"><i class="fas fa-bullseye"></i></div>
+        <h3 class="feature-title">Thực Chiến 100%</h3>
+        <p class="feature-desc">Mọi bài học đều được đúc kết từ chiến dịch thực tế. Không lý thuyết suông — học xong làm được ngay.</p>
+      </div>
+      <div class="feature-card fade-in">
+        <div class="feature-icon"><i class="fas fa-home"></i></div>
+        <h3 class="feature-title">Chuyên Ngành BĐS</h3>
+        <p class="feature-desc">Nội dung được thiết kế riêng cho bất động sản. Từ căn hộ bình dân đến dự án cao cấp — đều có chiến lược phù hợp.</p>
+      </div>
+      <div class="feature-card fade-in">
+        <div class="feature-icon"><i class="fas fa-infinity"></i></div>
+        <h3 class="feature-title">Truy Cập Vĩnh Viễn</h3>
+        <p class="feature-desc">Mua một lần, học mãi mãi. Nội dung cập nhật liên tục theo thuật toán và tính năng mới nhất của từng nền tảng.</p>
+      </div>
+      <div class="feature-card fade-in">
+        <div class="feature-icon"><i class="fas fa-users"></i></div>
+        <h3 class="feature-title">Cộng Đồng Hỗ Trợ</h3>
+        <p class="feature-desc">Tham gia nhóm học viên độc quyền. Chia sẻ kinh nghiệm, giải đáp thắc mắc và kết nối với các chuyên gia BĐS.</p>
+      </div>
+      <div class="feature-card fade-in">
+        <div class="feature-icon"><i class="fas fa-certificate"></i></div>
+        <h3 class="feature-title">Chứng Chỉ Hoàn Thành</h3>
+        <p class="feature-desc">Nhận chứng chỉ có giá trị sau khi hoàn thành khóa học. Tăng uy tín và cơ hội nghề nghiệp trong ngành BĐS.</p>
+      </div>
+      <div class="feature-card fade-in">
+        <div class="feature-icon"><i class="fas fa-headset"></i></div>
+        <h3 class="feature-title">Hỗ Trợ 1-1</h3>
+        <p class="feature-desc">Học viên Premium được hỗ trợ trực tiếp từ Mrbo Ads. Review chiến dịch, tư vấn tối ưu ngân sách theo dự án thực tế.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ INSTRUCTOR ═══════════════════════════════════ -->
+<section class="instructor-section" id="instructor">
+  <div class="container">
+    <div class="instructor-content">
+      <div class="instructor-img-wrapper fade-in">
+        <div class="instructor-img" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--dark-600),var(--dark-500));font-size:5rem">
+          🧑‍💻
+        </div>
+        <div class="instructor-card-badge">
+          <div class="instructor-badge-value">5+</div>
+          <div class="instructor-badge-label">Năm kinh nghiệm</div>
+        </div>
+      </div>
+
+      <div class="instructor-info fade-in">
+        <div class="instructor-tag"><i class="fas fa-award"></i> Giảng Viên</div>
+        <h2 class="instructor-name">Mrbo Ads</h2>
+        <p class="instructor-title-text">Chuyên gia Performance Marketing Bất Động Sản</p>
+        <p class="instructor-desc">
+          Với hơn 5 năm kinh nghiệm chạy quảng cáo cho hàng trăm dự án bất động sản từ Bắc đến Nam,
+          Mrbo Ads đã giúp hàng nghìn môi giới và chủ đầu tư tối ưu ngân sách quảng cáo, tăng leads chất lượng
+          và xây dựng thương hiệu cá nhân mạnh mẽ trên mạng xã hội.
+        </p>
+
+        <div class="instructor-achievements">
+          <div class="achievement-item">
+            <i class="fas fa-chart-line"></i>
+            <span>100Bn+ ngân sách quảng cáo</span>
+          </div>
+          <div class="achievement-item">
+            <i class="fas fa-building"></i>
+            <span>200+ dự án BĐS</span>
+          </div>
+          <div class="achievement-item">
+            <i class="fas fa-users"></i>
+            <span>4,700+ học viên</span>
+          </div>
+          <div class="achievement-item">
+            <i class="fas fa-star"></i>
+            <span>Đánh giá 4.9/5 sao</span>
+          </div>
+          <div class="achievement-item">
+            <i class="fab fa-facebook"></i>
+            <span>Meta Certified</span>
+          </div>
+          <div class="achievement-item">
+            <i class="fab fa-google"></i>
+            <span>Google Ads Certified</span>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:12px;flex-wrap:wrap">
+          <a href="/courses.html" class="btn btn-primary btn-lg">
+            <i class="fas fa-play"></i> Xem Khóa Học
+          </a>
+          <a href="https://facebook.com" target="_blank" class="btn btn-ghost btn-lg">
+            <i class="fab fa-facebook"></i> Follow Facebook
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════ TESTIMONIALS ══════════════════════════════════ -->
+<section id="testimonials">
+  <div class="container">
+    <div class="section-header fade-in">
+      <div class="section-tag"><i class="fas fa-quote-left"></i> Phản Hồi</div>
+      <h2 class="section-title">Học Viên Nói Gì?</h2>
+      <p class="section-desc">Hàng nghìn môi giới và chủ đầu tư đã thay đổi cách làm marketing nhờ Mrbo Ads</p>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card fade-in">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"Sau khi học xong khóa Facebook Ads của Mrbo Ads, tôi giảm CPL từ 300k xuống còn 45k mà chất lượng leads tăng lên rõ rệt. Đây là khóa học đáng tiền nhất tôi từng đầu tư!"</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">TH</div>
+          <div>
+            <div class="author-name">Trần Hùng</div>
+            <div class="author-title">Môi giới BĐS, TP.HCM</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card fade-in">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"Khóa Google Ads thực sự rất thực chiến. Mrbo Ads hướng dẫn rất chi tiết từng bước setup, tối ưu từ khóa và remarketing cho BĐS. ROAS của tôi đạt 9x sau 1 tháng áp dụng."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">ML</div>
+          <div>
+            <div class="author-name">Minh Lan</div>
+            <div class="author-title">Trưởng phòng Marketing, CBRE</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card fade-in">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"Tôi đã học nhiều khóa marketing online nhưng khóa TikTok Ads của Mrbo Ads là đỉnh nhất! Nội dung cực kỳ thực tế, case study toàn từ dự án BĐS thật, áp dụng được ngay."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">QA</div>
+          <div>
+            <div class="author-name">Quốc Anh</div>
+            <div class="author-title">Chủ đầu tư, Hà Nội</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card fade-in">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"Combo 3 kênh quảng cáo thật sự xứng đáng với giá tiền. Giờ tôi tự chạy được Facebook, Google và TikTok Ads cho dự án của mình mà không cần thuê agency nữa. Tiết kiệm được rất nhiều!"</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">PT</div>
+          <div>
+            <div class="author-name">Phương Thảo</div>
+            <div class="author-title">Giám đốc Sales, Đà Nẵng</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card fade-in">
+        <div class="testimonial-stars">★★★★☆</div>
+        <p class="testimonial-text">"Giảng viên nhiệt tình, nội dung cập nhật. Tôi thích nhất là có nhóm hỗ trợ riêng, hỏi gì cũng được trả lời nhanh. Sẽ tiếp tục đăng ký các khóa khác của Mrbo Ads."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">DV</div>
+          <div>
+            <div class="author-name">Duy Vũ</div>
+            <div class="author-title">Môi giới độc lập, Bình Dương</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card fade-in">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"Ban đầu tôi lo không học được vì không biết gì về công nghệ, nhưng Mrbo Ads dạy từng bước rất rõ ràng. Bây giờ tôi tự chạy ads 30 triệu/tháng mà hiệu quả gấp đôi thuê người làm."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">HN</div>
+          <div>
+            <div class="author-name">Hoàng Nam</div>
+            <div class="author-title">Trưởng nhóm môi giới, Vinhomes</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════ CTA SECTION ═════════════════════════════════ -->
+<section class="cta-section" id="contact">
+  <div class="container">
+    <div class="cta-content fade-in">
+      <div class="section-tag" style="margin:0 auto 16px"><i class="fas fa-rocket"></i> Bắt Đầu Ngay</div>
+      <h2 class="cta-title">Sẵn Sàng Bứt Phá<br><span class="gradient-text">Doanh Số BĐS?</span></h2>
+      <p class="cta-desc">Tham gia cùng hơn 4,700 học viên đã thay đổi cách làm marketing. Đăng ký miễn phí ngay hôm nay!</p>
+      <div class="cta-actions">
+        <a href="/register.html" class="btn btn-primary btn-xl">
+          <i class="fas fa-user-plus"></i>
+          Đăng Ký Miễn Phí
+        </a>
+        <a href="/courses.html" class="btn btn-outline btn-xl">
+          <i class="fas fa-search"></i>
+          Khám Phá Khóa Học
+        </a>
+      </div>
+      <p style="margin-top:20px;font-size:0.82rem;color:var(--text-muted)">
+        <i class="fas fa-shield-alt" style="color:var(--accent-green)"></i>
+        Bảo đảm hoàn tiền 100% trong 7 ngày nếu không hài lòng
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════ FOOTER ══════════════════════════════════════ -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="/" class="navbar-logo" style="display:inline-flex;margin-bottom:14px">
+          <div class="logo-icon">M</div>
+          <span class="logo-text" style="margin-left:10px">Mrbo<span>Ads</span></span>
+        </a>
+        <p class="footer-desc">Nền tảng E-Learning hàng đầu về Performance Marketing dành cho ngành Bất Động Sản Việt Nam.</p>
+        <div class="social-links">
+          <a href="#" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="social-link" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+          <a href="#" class="social-link" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+          <a href="#" class="social-link" aria-label="Zalo"><i class="fas fa-comment"></i></a>
+        </div>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Khóa Học</div>
+        <div class="footer-links">
+          <a href="/courses.html?category=facebook-ads" class="footer-link">Facebook Ads BĐS</a>
+          <a href="/courses.html?category=google-ads" class="footer-link">Google Ads BĐS</a>
+          <a href="/courses.html?category=tiktok-ads" class="footer-link">TikTok Ads BĐS</a>
+          <a href="/courses.html?category=landing-page" class="footer-link">Landing Page</a>
+          <a href="/courses.html?category=data-analytics" class="footer-link">Data & Analytics</a>
+        </div>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Tài Khoản</div>
+        <div class="footer-links">
+          <a href="/register.html" class="footer-link">Đăng Ký</a>
+          <a href="/login.html" class="footer-link">Đăng Nhập</a>
+          <a href="/dashboard.html" class="footer-link">Dashboard</a>
+          <a href="/dashboard.html#my-courses" class="footer-link">Khóa Học Của Tôi</a>
+        </div>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Hỗ Trợ</div>
+        <div class="footer-links">
+          <a href="#" class="footer-link">Chính Sách Hoàn Tiền</a>
+          <a href="#" class="footer-link">Điều Khoản Dịch Vụ</a>
+          <a href="#" class="footer-link">Liên Hệ Hợp Tác</a>
+          <a href="#" class="footer-link">Blog Marketing BĐS</a>
+        </div>
+        <div style="margin-top:20px">
+          <div style="font-size:0.78rem;color:var(--text-muted);margin-bottom:6px">Liên hệ tư vấn:</div>
+          <a href="tel:0900000000" style="font-size:0.9rem;font-weight:700;color:var(--primary)">0900 000 000</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2024 Mrbo Ads. Tất cả quyền được bảo lưu.</span>
+      <span>Thiết kế bởi <strong style="color:var(--primary)">Mrbo Ads Team</strong></span>
+    </div>
+  </div>
+</footer>
+
+<!-- Scroll To Top -->
+<button class="scroll-top" id="scrollTop" aria-label="Scroll to top">
+  <i class="fas fa-chevron-up"></i>
+</button>
+
+<script src="/js/api.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/main.js"></script>
+<script>
+  // Load featured courses on homepage
+  document.addEventListener('DOMContentLoaded', async () => {
+    await loadFeaturedCourses();
+  });
+
+  async function loadFeaturedCourses() {
+    const grid = document.getElementById('featuredCoursesGrid');
+    try {
+      const data = await API.get('/courses/featured');
+      if (data.success && data.data.length > 0) {
+        grid.innerHTML = data.data.map(c => renderCourseCard(c)).join('');
+      } else {
+        grid.innerHTML = renderFallbackCourses();
+      }
+    } catch {
+      grid.innerHTML = renderFallbackCourses();
+    }
+  }
+
+  function renderFallbackCourses() {
+    const courses = [
+      { title: 'Facebook Ads Toàn Diện Cho BĐS 2024', category_name: 'Facebook Ads', level: 'beginner', duration: 1200, rating: 4.8, rating_count: 312, enrolled_count: 1247, price: 2990000, original_price: 4990000, is_featured: true, emoji: '📱', slug: 'facebook-ads-bat-dong-san-2024' },
+      { title: 'Google Ads BĐS: Tìm Kiếm & Display', category_name: 'Google Ads', level: 'intermediate', duration: 960, rating: 4.9, rating_count: 198, enrolled_count: 856, price: 3490000, original_price: 5490000, is_featured: true, emoji: '🔍', slug: 'google-ads-bds-tim-kiem-display' },
+      { title: 'TikTok Ads BĐS: Viral & Chuyển Đổi', category_name: 'TikTok Ads', level: 'beginner', duration: 720, rating: 4.7, rating_count: 445, enrolled_count: 2134, price: 1990000, original_price: 3490000, is_featured: false, emoji: '🎵', slug: 'tiktok-ads-bds-viral-content' },
+      { title: 'Combo 3 Kênh Performance Marketing BĐS', category_name: 'Combo', level: 'advanced', duration: 2400, rating: 5.0, rating_count: 87, enrolled_count: 423, price: 5990000, original_price: 9990000, is_featured: true, emoji: '🚀', slug: 'combo-performance-marketing-bds' },
+    ];
+    return courses.map(c => renderCourseCard(c)).join('');
+  }
+
+  function filterByCategory(slug) {
+    window.location.href = `/courses.html?category=${slug}`;
+  }
+</script>
+</body>
+</html>

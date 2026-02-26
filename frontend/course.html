@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chi Tiết Khóa Học — Mrbo Ads E-Learning</title>
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23F97316'/><text x='50%' y='55%' text-anchor='middle' dominant-baseline='middle' font-size='18' font-weight='900' fill='white' font-family='Arial'>M</text></svg>">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <div class="container">
+    <div class="navbar-inner">
+      <a href="/" class="navbar-logo">
+        <div class="logo-icon">M</div>
+        <span class="logo-text">Mrbo<span>Ads</span></span>
+      </a>
+      <ul class="navbar-nav" id="navMenu">
+        <li><a href="/" class="nav-link">Trang chủ</a></li>
+        <li><a href="/courses.html" class="nav-link active">Khóa học</a></li>
+      </ul>
+      <div class="navbar-actions">
+        <a href="/login.html" class="btn btn-outline btn-sm" id="btnLogin">Đăng nhập</a>
+        <a href="/register.html" class="btn btn-primary btn-sm" id="btnRegister">Bắt đầu học</a>
+        <div id="userMenu" class="hidden" style="position:relative">
+          <button class="btn btn-ghost btn-sm" id="userMenuBtn" style="gap:8px">
+            <span id="userInitial" style="width:28px;height:28px;background:var(--primary);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.8rem"></span>
+            <span id="userName"></span>
+            <i class="fas fa-chevron-down" style="font-size:0.65rem"></i>
+          </button>
+          <div id="userDropdown" class="hidden" style="position:absolute;top:calc(100% + 8px);right:0;background:var(--dark-700);border:1px solid rgba(255,255,255,0.08);border-radius:var(--radius-md);padding:8px;min-width:180px;z-index:200;box-shadow:var(--shadow-lg)">
+            <a href="/dashboard.html" style="display:flex;align-items:center;gap:8px;padding:9px 12px;border-radius:var(--radius-sm);font-size:0.85rem;color:var(--text-secondary)" onmouseover="this.style.background='rgba(255,255,255,0.06)';this.style.color='var(--text-primary)'" onmouseout="this.style.background='';this.style.color='var(--text-secondary)'"><i class="fas fa-tachometer-alt" style="width:14px"></i> Dashboard</a>
+            <button id="btnLogout" style="width:100%;display:flex;align-items:center;gap:8px;padding:9px 12px;border-radius:var(--radius-sm);font-size:0.85rem;color:#F87171;background:none;border:none;cursor:pointer" onmouseover="this.style.background='rgba(239,68,68,0.08)'" onmouseout="this.style.background=''"><i class="fas fa-sign-out-alt" style="width:14px"></i> Đăng xuất</button>
+          </div>
+        </div>
+        <button class="mobile-menu-btn" id="mobileMenuBtn"><i class="fas fa-bars"></i></button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- Loading State -->
+<div id="loadingState" style="min-height:100vh;display:flex;align-items:center;justify-content:center">
+  <div style="text-align:center;color:var(--text-muted)">
+    <div class="loader" style="width:32px;height:32px;border-width:3px;margin:0 auto 16px"></div>
+    <p>Đang tải khóa học...</p>
+  </div>
+</div>
+
+<!-- Course Content (hidden until loaded) -->
+<div id="courseContent" class="hidden">
+  <!-- HERO -->
+  <div class="course-hero-section">
+    <div class="container">
+      <div class="course-detail-grid">
+        <!-- Left: Course Info -->
+        <div>
+          <div class="course-breadcrumb">
+            <a href="/">Trang chủ</a>
+            <i class="fas fa-chevron-right"></i>
+            <a href="/courses.html">Khóa học</a>
+            <i class="fas fa-chevron-right"></i>
+            <span id="courseBreadcrumb" style="color:var(--text-secondary)">...</span>
+          </div>
+
+          <div id="courseCategory" class="course-category" style="font-size:0.82rem;margin-bottom:10px"></div>
+          <h1 class="course-detail-title" id="courseTitle">...</h1>
+          <p class="course-detail-desc" id="courseDesc">...</p>
+
+          <div class="course-detail-meta">
+            <span><i class="fas fa-star" style="color:var(--accent-gold)"></i> <strong id="courseRating">-</strong> (<span id="courseRatingCount">0</span> đánh giá)</span>
+            <span><i class="fas fa-users"></i> <strong id="courseEnrolled">0</strong> học viên</span>
+            <span><i class="fas fa-clock"></i> <span id="courseDuration">0h</span></span>
+            <span><i class="fas fa-signal"></i> <span id="courseLevel">-</span></span>
+            <span><i class="fas fa-user-tie"></i> <span id="courseInstructor">-</span></span>
+          </div>
+
+          <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+            <div id="courseRatingStars" class="stars" style="font-size:1.1rem"></div>
+            <span id="lastUpdated" style="font-size:0.78rem;color:var(--text-muted)"></span>
+          </div>
+        </div>
+
+        <!-- Right: Purchase Card -->
+        <div class="course-purchase-card">
+          <!-- Preview Video / Thumbnail -->
+          <div style="background:var(--dark-600);border-radius:var(--radius-md);aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;margin-bottom:20px;cursor:pointer;overflow:hidden" id="previewThumb">
+            <div style="text-align:center;color:var(--text-muted)">
+              <div style="font-size:3rem;margin-bottom:8px" id="previewEmoji">📺</div>
+              <div style="font-size:0.82rem">Xem trước nội dung</div>
+            </div>
+          </div>
+
+          <div style="margin-bottom:16px">
+            <span class="purchase-price" id="purchasePrice">-</span>
+            <span class="purchase-original" id="purchaseOriginal"></span>
+            <span class="purchase-discount" id="purchaseDiscount" style="display:none"></span>
+          </div>
+
+          <!-- Countdown timer -->
+          <div id="countdownBox" style="background:rgba(249,115,22,0.08);border:1px solid rgba(249,115,22,0.2);border-radius:var(--radius-sm);padding:10px 14px;margin-bottom:16px;text-align:center;font-size:0.82rem;color:var(--primary)">
+            <i class="fas fa-clock"></i> Ưu đãi kết thúc sau: <strong id="countdown">23:59:59</strong>
+          </div>
+
+          <div id="enrolledBanner" class="hidden" style="background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.3);border-radius:var(--radius-sm);padding:10px 14px;margin-bottom:16px;text-align:center;font-size:0.85rem;color:var(--accent-green)">
+            <i class="fas fa-check-circle"></i> Bạn đã đăng ký khóa học này
+          </div>
+
+          <button class="btn btn-primary w-100 btn-lg" id="enrollBtn" style="margin-bottom:10px">
+            <i class="fas fa-shopping-cart"></i> Đăng Ký Ngay
+          </button>
+          <button class="btn btn-ghost w-100" id="previewBtn">
+            <i class="fas fa-play"></i> Xem Thử Miễn Phí
+          </button>
+
+          <div class="purchase-includes">
+            <div class="purchase-includes-title">Bao gồm:</div>
+            <div class="purchase-include-item"><i class="fas fa-check-circle"></i> Truy cập vĩnh viễn</div>
+            <div class="purchase-include-item"><i class="fas fa-check-circle"></i> Video chất lượng cao HD</div>
+            <div class="purchase-include-item"><i class="fas fa-check-circle"></i> Tài liệu học tập độc quyền</div>
+            <div class="purchase-include-item"><i class="fas fa-check-circle"></i> Chứng chỉ hoàn thành</div>
+            <div class="purchase-include-item"><i class="fas fa-check-circle"></i> Hỗ trợ từ cộng đồng</div>
+            <div class="purchase-include-item"><i class="fas fa-check-circle"></i> Bảo đảm hoàn tiền 7 ngày</div>
+          </div>
+
+          <p style="text-align:center;font-size:0.75rem;color:var(--text-muted);margin-top:16px">
+            <i class="fas fa-shield-alt" style="color:var(--accent-green)"></i> Bảo đảm hoàn tiền 100% trong 7 ngày
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COURSE BODY -->
+  <div style="padding:48px 0 80px;background:var(--dark-900)">
+    <div class="container">
+      <div class="course-detail-grid" style="align-items:start">
+        <div>
+          <!-- What you'll learn -->
+          <div style="background:var(--dark-700);border:1px solid rgba(255,255,255,0.06);border-radius:var(--radius-lg);padding:28px;margin-bottom:32px">
+            <h2 style="font-size:1.2rem;font-weight:700;margin-bottom:18px">Bạn Sẽ Học Được Gì?</h2>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+              <div style="display:flex;gap:8px;font-size:0.85rem;color:var(--text-secondary)"><i class="fas fa-check" style="color:var(--accent-green);margin-top:2px;font-size:0.75rem;flex-shrink:0"></i> Thiết lập và cấu hình tài khoản quảng cáo chuyên nghiệp</div>
+              <div style="display:flex;gap:8px;font-size:0.85rem;color:var(--text-secondary)"><i class="fas fa-check" style="color:var(--accent-green);margin-top:2px;font-size:0.75rem;flex-shrink:0"></i> Tạo đối tượng mục tiêu chính xác cho BĐS</div>
+              <div style="display:flex;gap:8px;font-size:0.85rem;color:var(--text-secondary)"><i class="fas fa-check" style="color:var(--accent-green);margin-top:2px;font-size:0.75rem;flex-shrink:0"></i> Viết copy quảng cáo thu hút, tỷ lệ click cao</div>
+              <div style="display:flex;gap:8px;font-size:0.85rem;color:var(--text-secondary)"><i class="fas fa-check" style="color:var(--accent-green);margin-top:2px;font-size:0.75rem;flex-shrink:0"></i> Tối ưu ngân sách, giảm CPL tối đa 60%</div>
+              <div style="display:flex;gap:8px;font-size:0.85rem;color:var(--text-secondary)"><i class="fas fa-check" style="color:var(--accent-green);margin-top:2px;font-size:0.75rem;flex-shrink:0"></i> A/B Testing và tối ưu chiến dịch liên tục</div>
+              <div style="display:flex;gap:8px;font-size:0.85rem;color:var(--text-secondary)"><i class="fas fa-check" style="color:var(--accent-green);margin-top:2px;font-size:0.75rem;flex-shrink:0"></i> Scale budget an toàn và hiệu quả</div>
+              <div style="display:flex;gap:8px;font-size:0.85rem;color:var(--text-secondary)"><i class="fas fa-check" style="color:var(--accent-green);margin-top:2px;font-size:0.75rem;flex-shrink:0"></i> Xây dựng phễu marketing cho BĐS</div>
+              <div style="display:flex;gap:8px;font-size:0.85rem;color:var(--text-secondary)"><i class="fas fa-check" style="color:var(--accent-green);margin-top:2px;font-size:0.75rem;flex-shrink:0"></i> Đọc báo cáo và ra quyết định dựa trên data</div>
+            </div>
+          </div>
+
+          <!-- Curriculum -->
+          <div>
+            <h2 style="font-size:1.2rem;font-weight:700;margin-bottom:6px">Nội Dung Khóa Học</h2>
+            <p style="font-size:0.82rem;color:var(--text-muted);margin-bottom:18px" id="curriculumMeta">Đang tải...</p>
+            <div id="curriculumList"></div>
+          </div>
+
+          <!-- Reviews -->
+          <div style="margin-top:40px">
+            <h2 style="font-size:1.2rem;font-weight:700;margin-bottom:18px">Đánh Giá Từ Học Viên</h2>
+
+            <div style="display:flex;align-items:center;gap:32px;background:var(--dark-700);border-radius:var(--radius-lg);padding:24px;margin-bottom:20px">
+              <div style="text-align:center">
+                <div style="font-size:3.5rem;font-weight:900;line-height:1;color:var(--accent-gold)" id="avgRatingBig">-</div>
+                <div class="stars" style="font-size:1rem;margin:6px 0" id="avgStarsBig"></div>
+                <div style="font-size:0.78rem;color:var(--text-muted)" id="reviewCountBig">0 đánh giá</div>
+              </div>
+              <div style="flex:1">
+                <!-- Rating bars would go here -->
+                <div style="font-size:0.85rem;color:var(--text-muted)">
+                  <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+                    <span style="width:16px;text-align:right">5</span>
+                    <i class="fas fa-star" style="color:var(--accent-gold);font-size:0.7rem"></i>
+                    <div style="flex:1;height:6px;background:var(--dark-500);border-radius:100px"><div style="width:70%;height:100%;background:var(--accent-gold);border-radius:100px"></div></div>
+                    <span style="font-size:0.75rem;color:var(--text-muted)">70%</span>
+                  </div>
+                  <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+                    <span style="width:16px;text-align:right">4</span>
+                    <i class="fas fa-star" style="color:var(--accent-gold);font-size:0.7rem"></i>
+                    <div style="flex:1;height:6px;background:var(--dark-500);border-radius:100px"><div style="width:22%;height:100%;background:var(--accent-gold);border-radius:100px"></div></div>
+                    <span style="font-size:0.75rem;color:var(--text-muted)">22%</span>
+                  </div>
+                  <div style="display:flex;align-items:center;gap:8px">
+                    <span style="width:16px;text-align:right">3</span>
+                    <i class="fas fa-star" style="color:var(--accent-gold);font-size:0.7rem"></i>
+                    <div style="flex:1;height:6px;background:var(--dark-500);border-radius:100px"><div style="width:8%;height:100%;background:var(--accent-gold);border-radius:100px"></div></div>
+                    <span style="font-size:0.75rem;color:var(--text-muted)">8%</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div id="reviewsList"></div>
+          </div>
+        </div>
+
+        <!-- Right sticky: Related courses -->
+        <div>
+          <div style="background:var(--dark-700);border:1px solid rgba(255,255,255,0.06);border-radius:var(--radius-lg);padding:24px;position:sticky;top:88px">
+            <h3 style="font-size:0.95rem;font-weight:700;margin-bottom:16px">Khóa Học Liên Quan</h3>
+            <div id="relatedCourses">
+              <div style="color:var(--text-muted);font-size:0.85rem;text-align:center;padding:20px">
+                <div class="loader" style="margin:0 auto 8px"></div>
+                Đang tải...
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Error State -->
+<div id="errorState" class="hidden" style="min-height:60vh;display:flex;align-items:center;justify-content:center">
+  <div style="text-align:center;padding:40px">
+    <div style="font-size:4rem;margin-bottom:16px">😕</div>
+    <h2 style="margin-bottom:10px">Không tìm thấy khóa học</h2>
+    <p style="color:var(--text-muted);margin-bottom:20px">Khóa học bạn tìm không tồn tại hoặc đã bị xóa.</p>
+    <a href="/courses.html" class="btn btn-primary">← Xem tất cả khóa học</a>
+  </div>
+</div>
+
+<button class="scroll-top" id="scrollTop" aria-label="Scroll to top"><i class="fas fa-chevron-up"></i></button>
+
+<script src="/js/api.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/main.js"></script>
+<script>
+  const slug = new URLSearchParams(window.location.search).get('slug');
+  let courseData = null;
+  let isEnrolled = false;
+
+  const DEMO_COURSES = {
+    'facebook-ads-bat-dong-san-2024': {
+      id: 1, title: 'Facebook Ads Toàn Diện Cho Bất Động Sản 2024', slug: 'facebook-ads-bat-dong-san-2024',
+      description: 'Khóa học Facebook Ads chuyên sâu dành riêng cho môi giới và chủ đầu tư bất động sản. Từ cơ bản đến nâng cao, tối ưu ngân sách, tạo leads chất lượng cao.',
+      price: 2990000, original_price: 4990000, category_name: 'Facebook Ads', instructor_name: 'Mrbo Ads',
+      level: 'beginner', duration: 1200, rating: 4.8, rating_count: 312, enrolled_count: 1247, emoji: '📱',
+      curriculum: [
+        { title: 'Giới Thiệu Khóa Học', lessons: [{ title: 'Tổng quan & lộ trình học', duration: 10, is_preview: true, type: 'video' }, { title: 'Tư duy Performance Marketing BĐS', duration: 20, is_preview: true, type: 'video' }] },
+        { title: 'Nền Tảng Facebook Ads', lessons: [{ title: 'Cài đặt Business Manager & Ad Account', duration: 30, is_preview: false, type: 'video' }, { title: 'Pixel Facebook: Cài đặt & Theo dõi', duration: 45, is_preview: false, type: 'video' }, { title: 'Cấu trúc chiến dịch Campaign-AdSet-Ad', duration: 35, is_preview: false, type: 'video' }] },
+        { title: 'Đối Tượng Mục Tiêu', lessons: [{ title: 'Core Audience - Đối tượng lõi', duration: 40, is_preview: false, type: 'video' }, { title: 'Custom Audience - Đối tượng tùy chỉnh', duration: 35, is_preview: false, type: 'video' }, { title: 'Lookalike Audience - Đối tượng tương tự', duration: 30, is_preview: false, type: 'video' }] },
+        { title: 'Sáng Tạo Nội Dung', lessons: [{ title: 'Copywriting cho quảng cáo BĐS', duration: 50, is_preview: false, type: 'video' }, { title: 'Thiết kế hình ảnh & video thu hút', duration: 40, is_preview: false, type: 'video' }] },
+        { title: 'Tối Ưu & Scale', lessons: [{ title: 'Đọc hiểu số liệu & KPI', duration: 45, is_preview: false, type: 'video' }, { title: 'A/B Testing thực chiến', duration: 55, is_preview: false, type: 'video' }, { title: 'Scale budget an toàn', duration: 40, is_preview: false, type: 'video' }] },
+      ],
+      reviews: [
+        { user_name: 'Trần Hùng', rating: 5, comment: 'Khóa học rất thực chiến, áp dụng được ngay!', created_at: '2024-01-20' },
+        { user_name: 'Minh Lan', rating: 5, comment: 'CPL giảm từ 300k xuống 45k sau khi học xong. Tuyệt vời!', created_at: '2024-01-18' },
+      ]
+    }
+  };
+
+  document.addEventListener('DOMContentLoaded', async () => {
+    if (!slug) { showError(); return; }
+
+    try {
+      const data = await API.get(`/courses/${slug}`);
+      if (data.success) {
+        courseData = data.data;
+        renderCourseDetail(courseData);
+      } else { useDemoData(); }
+    } catch { useDemoData(); }
+
+    startCountdown();
+    loadRelatedCourses();
+  });
+
+  function useDemoData() {
+    const demo = DEMO_COURSES[slug];
+    if (demo) { courseData = demo; renderCourseDetail(demo); }
+    else showError();
+  }
+
+  function renderCourseDetail(c) {
+    document.title = `${c.title} — Mrbo Ads`;
+    document.getElementById('loadingState').classList.add('hidden');
+    document.getElementById('courseContent').classList.remove('hidden');
+
+    const levelLabels = { beginner: 'Cơ bản', intermediate: 'Trung cấp', advanced: 'Nâng cao' };
+    document.getElementById('courseBreadcrumb').textContent = c.title;
+    document.getElementById('courseCategory').innerHTML = `<i class="fas fa-tag"></i> ${c.category_name}`;
+    document.getElementById('courseTitle').textContent = c.title;
+    document.getElementById('courseDesc').textContent = c.description;
+    document.getElementById('courseRating').textContent = c.rating;
+    document.getElementById('courseRatingCount').textContent = c.rating_count;
+    document.getElementById('courseEnrolled').textContent = c.enrolled_count?.toLocaleString('vi-VN');
+    document.getElementById('courseDuration').textContent = `${Math.round((c.duration || 0) / 60)}h ${(c.duration || 0) % 60}m`;
+    document.getElementById('courseLevel').textContent = levelLabels[c.level] || c.level;
+    document.getElementById('courseInstructor').textContent = c.instructor_name;
+    document.getElementById('courseRatingStars').textContent = '★'.repeat(Math.round(c.rating));
+    document.getElementById('lastUpdated').textContent = 'Cập nhật tháng 1, 2024';
+    document.getElementById('avgRatingBig').textContent = c.rating;
+    document.getElementById('avgStarsBig').textContent = '★'.repeat(Math.round(c.rating));
+    document.getElementById('reviewCountBig').textContent = `${c.rating_count} đánh giá`;
+
+    // Price
+    const priceEl = document.getElementById('purchasePrice');
+    priceEl.textContent = c.price === 0 ? 'Miễn phí' : c.price.toLocaleString('vi-VN') + '₫';
+    if (c.price === 0) priceEl.style.color = 'var(--accent-green)';
+
+    if (c.original_price && c.original_price > c.price) {
+      document.getElementById('purchaseOriginal').textContent = c.original_price.toLocaleString('vi-VN') + '₫';
+      const disc = Math.round((1 - c.price / c.original_price) * 100);
+      const discEl = document.getElementById('purchaseDiscount');
+      discEl.textContent = `-${disc}%`;
+      discEl.style.display = 'inline-block';
+    }
+
+    document.getElementById('previewEmoji').textContent = c.emoji || '📺';
+
+    // Curriculum
+    const curriculum = c.curriculum || [];
+    const totalLessons = curriculum.reduce((s, sec) => s + (sec.lessons?.length || 0), 0);
+    document.getElementById('curriculumMeta').textContent = `${curriculum.length} chương • ${totalLessons} bài học • Tổng ${Math.round((c.duration || 0) / 60)} giờ`;
+
+    document.getElementById('curriculumList').innerHTML = curriculum.map((sec, i) => {
+      const lessons = sec.lessons || [];
+      return `
+        <div>
+          <div class="curriculum-section-header" onclick="toggleSection(${i})">
+            <div>
+              <div class="curriculum-section-title">${sec.title}</div>
+              <div class="curriculum-section-count">${lessons.length} bài • ${lessons.reduce((s, l) => s + (l.duration || 0), 0)} phút</div>
+            </div>
+            <i class="fas fa-chevron-down" id="secIcon${i}" style="color:var(--text-muted);font-size:0.8rem;transition:var(--transition)"></i>
+          </div>
+          <div class="curriculum-lessons ${i === 0 ? 'open' : ''}" id="sec${i}">
+            ${lessons.map(l => `
+              <div class="curriculum-lesson">
+                <i class="fas fa-${l.type === 'video' ? 'play-circle' : l.type === 'quiz' ? 'question-circle' : 'file-alt'}"></i>
+                <span>${l.title}</span>
+                ${l.is_preview ? '<span class="lesson-preview-tag">Xem thử</span>' : ''}
+                <span class="lesson-duration">${l.duration || 0} phút</span>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    // Open first section icon
+    const firstIcon = document.getElementById('secIcon0');
+    if (firstIcon) firstIcon.style.transform = 'rotate(180deg)';
+
+    // Reviews
+    const reviews = c.reviews || [];
+    document.getElementById('reviewsList').innerHTML = reviews.length > 0 ? reviews.map(r => `
+      <div class="testimonial-card" style="margin-bottom:12px">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+          <div class="testimonial-author">
+            <div class="author-avatar">${r.user_name?.charAt(0) || '?'}</div>
+            <div><div class="author-name">${r.user_name}</div><div class="author-title">${new Date(r.created_at).toLocaleDateString('vi-VN')}</div></div>
+          </div>
+          <div class="stars">${'★'.repeat(r.rating)}${'☆'.repeat(5 - r.rating)}</div>
+        </div>
+        <p style="font-size:0.88rem;color:var(--text-secondary)">${r.comment || ''}</p>
+      </div>
+    `).join('') : '<p style="color:var(--text-muted);font-size:0.88rem">Chưa có đánh giá nào.</p>';
+
+    // Check enrollment
+    checkEnrollment(c.id);
+  }
+
+  function toggleSection(i) {
+    const panel = document.getElementById(`sec${i}`);
+    const icon = document.getElementById(`secIcon${i}`);
+    panel.classList.toggle('open');
+    icon.style.transform = panel.classList.contains('open') ? 'rotate(180deg)' : '';
+  }
+
+  async function checkEnrollment(courseId) {
+    if (!Auth.isLoggedIn()) return;
+    try {
+      const data = await API.authGet(`/users/me/progress/${courseId}`);
+      if (data.success) {
+        isEnrolled = true;
+        document.getElementById('enrolledBanner').classList.remove('hidden');
+        document.getElementById('enrollBtn').textContent = 'Tiếp Tục Học';
+        document.getElementById('enrollBtn').innerHTML = '<i class="fas fa-play"></i> Tiếp Tục Học';
+      }
+    } catch {}
+  }
+
+  document.getElementById('enrollBtn').addEventListener('click', async () => {
+    if (!Auth.isLoggedIn()) {
+      window.location.href = `/login.html?redirect=/course.html?slug=${slug}`;
+      return;
+    }
+    if (isEnrolled || courseData?.price === 0) {
+      window.location.href = `/learn.html?slug=${slug}`;
+      return;
+    }
+    // Enroll (free) or redirect to payment
+    const btn = document.getElementById('enrollBtn');
+    btn.disabled = true;
+    btn.innerHTML = '<div class="loader"></div> Đang xử lý...';
+    try {
+      const data = await API.authPost(`/courses/${courseData?.id}/enroll`, {});
+      if (data.success) {
+        isEnrolled = true;
+        document.getElementById('enrolledBanner').classList.remove('hidden');
+        btn.innerHTML = '<i class="fas fa-play"></i> Bắt Đầu Học Ngay';
+        btn.disabled = false;
+      }
+    } catch {
+      btn.disabled = false;
+      btn.innerHTML = '<i class="fas fa-shopping-cart"></i> Đăng Ký Ngay';
+    }
+  });
+
+  document.getElementById('previewBtn').addEventListener('click', () => {
+    alert('Tính năng xem thử sẽ được ra mắt sớm!');
+  });
+
+  function showError() {
+    document.getElementById('loadingState').classList.add('hidden');
+    document.getElementById('errorState').classList.remove('hidden');
+  }
+
+  function startCountdown() {
+    const end = new Date();
+    end.setHours(23, 59, 59, 999);
+    setInterval(() => {
+      const now = new Date();
+      const diff = end - now;
+      if (diff <= 0) return;
+      const h = Math.floor(diff / 3600000).toString().padStart(2, '0');
+      const m = Math.floor((diff % 3600000) / 60000).toString().padStart(2, '0');
+      const s = Math.floor((diff % 60000) / 1000).toString().padStart(2, '0');
+      const el = document.getElementById('countdown');
+      if (el) el.textContent = `${h}:${m}:${s}`;
+    }, 1000);
+  }
+
+  async function loadRelatedCourses() {
+    const container = document.getElementById('relatedCourses');
+    const related = [
+      { title: 'Google Ads BĐS: Tìm Kiếm & Display', price: 3490000, rating: 4.9, slug: 'google-ads-bds-tim-kiem-display', emoji: '🔍' },
+      { title: 'TikTok Ads BĐS: Viral Content', price: 1990000, rating: 4.7, slug: 'tiktok-ads-bds-viral-content', emoji: '🎵' },
+    ].filter(c => c.slug !== slug);
+
+    container.innerHTML = related.map(c => `
+      <a href="/course.html?slug=${c.slug}" style="display:flex;gap:10px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.04);text-decoration:none">
+        <div style="width:64px;height:48px;background:var(--dark-600);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0">${c.emoji}</div>
+        <div>
+          <div style="font-size:0.82rem;font-weight:600;color:var(--text-primary);line-height:1.3;margin-bottom:4px">${c.title}</div>
+          <div style="font-size:0.78rem;color:var(--primary);font-weight:700">${c.price.toLocaleString('vi-VN')}₫</div>
+        </div>
+      </a>
+    `).join('');
+  }
+</script>
+</body>
+</html>
